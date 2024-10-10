@@ -1,0 +1,70 @@
+#include <stdio.h>
+
+#define NUM_ACCOUNTS 3
+
+int main() {
+    float balances[NUM_ACCOUNTS] = {0.0, 0.0, 0.0}; // Initialize balances to zero
+    int choice, account_num;
+    float amount;
+
+    while (1) {
+        printf("\nBanking Menu:\n");
+        printf("1. Deposit\n");
+        printf("2. Withdraw\n");
+        printf("3. Check Balance\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter account number (1-%d): ", NUM_ACCOUNTS);
+                scanf("%d", &account_num);
+                printf("Enter amount to deposit: ");
+                scanf("%f", &amount);
+                if (account_num >= 1 && account_num <= NUM_ACCOUNTS) {
+                    balances[account_num - 1] += amount;
+                    printf("Deposit successful.\n");
+                } else {
+                    printf("Invalid account number.\n");
+                }
+                break;
+
+            case 2:
+                printf("Enter account number (1-%d): ", NUM_ACCOUNTS);
+                scanf("%d", &account_num);
+                printf("Enter amount to withdraw: ");
+                scanf("%f", &amount);
+                if (account_num >= 1 && account_num <= NUM_ACCOUNTS) {
+                    if (balances[account_num - 1] >= amount) {
+                        balances[account_num - 1] -= amount;
+                        printf("Withdrawal successful.\n");
+                    } else {
+                        printf("Insufficient balance.\n");
+                    }
+                } else {
+                    printf("Invalid account number.\n");
+                }
+                break;
+
+            case 3:
+                printf("Enter account number (1-%d): ", NUM_ACCOUNTS);
+                scanf("%d", &account_num);
+                if (account_num >= 1 && account_num <= NUM_ACCOUNTS) {
+                    printf("Account %d balance: %.2f\n", account_num, balances[account_num - 1]);
+                } else {
+                    printf("Invalid account number.\n");
+                }
+                break;
+
+            case 4:
+                printf("Exiting...\n");
+                return 0;
+
+            default:
+                printf("Invalid choice.\n");
+        }
+    }
+
+    return 0
+}
